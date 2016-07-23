@@ -1,0 +1,61 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+<title>ver4 score calc sample</title>
+
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+
+    var inputs = document.querySelectorAll("input");
+    var result = document.getElementById("result");
+
+    Array.prototype.forEach.call(inputs, function(element) {
+
+      element.addEventListener("change", function() {
+
+        var sum = 0;
+        var str = "";
+        var scoreNormalFirst;
+        var scoreNormal;
+
+        Array.prototype.forEach.call(inputs, function(element) {
+          sum += parseInt(element.value);
+        });
+
+        console.log(sum)
+
+        if (isNaN(sum) || sum <= 0) {
+          result.innerHTML = "<tr><td>入力値が不正です</td></tr>";
+        } else {
+            str += "<tr><th>コンボ数</th><th>通常時スコア</th><th>フィーバー中スコア</th></tr>";
+            scoreNormalFirst = parseInt(Math.pow(sum, 0.8) * 0.0286 + 200);
+          for (var combo = 1; combo <= 2000; combo++) {
+            scoreNormal = parseInt(scoreNormalFirst + scoreNormalFirst * Math.pow((combo-1) * 0.002, 0.5));
+            str += "<tr><th>" + combo + "</th><td>" + scoreNormal + "</td><td></td></tr>";
+          }
+          result.innerHTML = str;
+        }
+      })
+    });
+  })
+</script>
+
+<table>
+
+  <tr>
+    <th>デッキのソウル</th>
+    <td><input type="text" value="0" />※デッキに入れている～5枚のブロマイドのソウル値の合計</td>
+  </tr>
+  <tr>
+    <th>バンドのソウル</th>
+    <td><input type="text" value="0" /></td>
+  </tr>
+  <tr>
+    <th>サポートのソウル</th>
+    <td><input type="text" value="0" /></td>
+  </tr>
+
+</table>
+
+<table id="result">
+</table>
