@@ -9,51 +9,166 @@
     var inputs = document.querySelectorAll("input");
     var result = document.getElementById("result");
 
-    Array.prototype.forEach.call(inputs, function(element) {
+    //Array.prototype.forEach.call(inputs, function(element) {
 
-      element.addEventListener("change", function() {
+    document.querySelector("button").addEventListener("click", function() {
 
-        var sum = 0;
+        var soul = 0;
+        var bbb = 0;
+        var soul60 = 0;
+        var soul120 = 0;
         var str = "";
+        var scoreBase;
+        var score60Base;
+        var score120Base;
+        var scoreFeverBase;
+        var score60FeverBase;
+        var score120FeverBase;
         var scoreNormalFirst;
-        var scoreNormal;
+        var score60First;
+        var score120First;
+        var scoreNormalFeverFirst;
+        var score60FeverFirst;
+        var score120FeverFirst;
+        var score;
+        var i, iLen, j, jLen;
 
-        Array.prototype.forEach.call(inputs, function(element) {
-          sum += parseInt(element.value);
-        });
+        for (i = 1; i <= 5; i++) {
+          if (document.querySelector("#card" + i + " input[type=checkbox]").checked) {
+            bbb += document.querySelector("#card" + i + " input[type=text]").value * 0.2;
+          }
+          soul += parseInt(document.querySelector("#card" + i + " input[type=text]").value);
+        }
+        soul += parseInt(document.querySelector("#support input[type=text]").value);
+        soul60 = parseInt(soul * 1.6);
+        soul120 = parseInt(soul * 2.2);
+        soul += parseInt(document.querySelector("#band input[type=text]").value);
+        soul60 += parseInt(document.querySelector("#band input[type=text]").value);
+        soul120 += parseInt(document.querySelector("#band input[type=text]").value);
 
-        if (isNaN(sum) || sum <= 0) {
+        // BBBはBBBによる増加量合計後に切り捨て
+        bbb = parseInt(bbb);
+        soul += bbb;
+        soul60 += bbb;
+        soul120 += bbb;
+
+        console.log(soul)
+        console.log(soul60)
+        console.log(soul120)
+
+        if (isNaN(soul) || soul < 0) {
           result.innerHTML = "<tr><td>入力値が不正です</td></tr>";
         } else {
-            str += "<tr><th>コンボ数</th><th>通常時スコア</th></tr>";
-            scoreNormalFirst = parseInt(Math.pow(sum, 0.8) * 0.0286 + 200);
-          for (var combo = 1; combo <= 2000; combo++) {
-            scoreNormal = parseInt(scoreNormalFirst + scoreNormalFirst * Math.pow((combo-1) * 0.002, 0.5));
-            str += "<tr><th>" + combo + "</th><td>" + scoreNormal + "</td></tr>";
+          str += "<tr><th rowspan='2'></th><th colspan='8'>F3</th><th colspan='4'>1.3</th><th colspan='2'>60%</th></tr>";
+          str += "<tr><th colspan='2'>F3</th><th colspan='2'>1.3</th><th colspan='2'>60%</th><th colspan='2'>なし</th><th colspan='2'>1.3</th><th colspan='2'>60%</th><th colspan='2'>60%</th></tr>";
+          str += "<tr><th>コンボ数</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th><th>通常</th><th>フィーバー</th></tr>";
+          scoreNormalFirst = parseInt(Math.pow(soul, 0.8) * 0.0286) + 200;
+          score60First = parseInt(Math.pow(soul60, 0.8) * 0.0286) + 200;
+          score120First = parseInt(Math.pow(soul120, 0.8) * 0.0286) + 200;
+          scoreNormalFeverFirst = parseInt(Math.pow(soul, 0.8) * 0.0286) + 250;
+          score60FeverFirst = parseInt(Math.pow(soul60, 0.8) * 0.0286) + 250
+          score120FeverFirst = parseInt(Math.pow(soul120, 0.8) * 0.0286) + 250;
+
+          for (var combo = 1; combo <= 1300; combo++) {
+            scoreBase = (scoreNormalFirst * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+            score60Base = (score60First * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+            score120Base = (score120First * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+            scoreFeverBase = (scoreNormalFeverFirst * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+            score60FeverBase = (score60FeverFirst * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+            score120FeverBase = (score120FeverFirst * (Math.pow((combo - 1) * 0.002, 0.5) + 1));
+
+            score = [];
+            score.push(parseInt(scoreBase * 1))
+            score.push(parseInt(parseInt(scoreFeverBase * 1) * (1.25 + 1.75 * 2)))
+            score.push(parseInt(scoreBase * 1.3))
+            score.push(parseInt(parseInt(scoreFeverBase * 1.3) * (1.25 + 1.75 * 1)))
+            score.push(parseInt(score60Base * 1))
+            score.push(parseInt(parseInt(score60FeverBase * 1) * (1.25 + 1.75 * 1)))
+            score.push(parseInt(scoreBase * 1))
+            score.push(parseInt(parseInt(scoreFeverBase * 1) * (1.25 + 1.75 * 1)))
+
+            score.push(parseInt(scoreBase * 1.6))
+            score.push(parseInt(parseInt(scoreFeverBase * 1.6) * (1.25)))
+            score.push(parseInt(score60Base * 1.3))
+            score.push(parseInt(parseInt(score60FeverBase * 1.3) * (1.25)))
+
+            score.push(parseInt(score120Base * 1))
+            score.push(parseInt(parseInt(score120FeverBase * 1) * (1.25)))
+
+            str += "<tr>";
+            str += "<th>" + combo + "</th>";
+            for (j = 0, jLen = score.length; j < jLen; j++) {
+              str += "<td>" + score[j] + "</td>";
+            }
+            str += "</tr>";
           }
           result.innerHTML = str;
         }
       })
-    });
+      //});
   })
 </script>
-
+<style>
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    border: 1px solid #666;
+  }
+  
+  #result td {
+    width: 80px;
+  }
+  
+  button {
+    margin: 1em;
+  }
+</style>
 <table>
 
   <tr>
-    <th>デッキのソウル</th>
-    <td><input type="text" value="0" />※デッキに入れている～5枚のブロマイドのソウル値の合計</td>
+    <th></th>
+    <th>ソウル値</th>
+    <th>BBB発動</th>
   </tr>
-  <tr>
-    <th>バンドのソウル</th>
+  <tr id="card1">
+    <th>ブロマイド1</th>
     <td><input type="text" value="0" /></td>
+    <td><input type="checkbox" /></td>
   </tr>
-  <tr>
-    <th>サポートのソウル</th>
+  <tr id="card2">
+    <th>ブロマイド2</th>
     <td><input type="text" value="0" /></td>
+    <td><input type="checkbox" /></td>
+  </tr>
+  <tr id="card3">
+    <th>ブロマイド3</th>
+    <td><input type="text" value="0" /></td>
+    <td><input type="checkbox" /></td>
+  </tr>
+  <tr id="card4">
+    <th>ブロマイド4</th>
+    <td><input type="text" value="0" /></td>
+    <td><input type="checkbox" /></td>
+  </tr>
+  <tr id="card5">
+    <th>ブロマイド5</th>
+    <td><input type="text" value="0" /></td>
+    <td><input type="checkbox" /></td>
+  </tr>
+  <tr id="band">
+    <th>バンド</th>
+    <td colspan="2"><input type="text" value="0" /></td>
+  </tr>
+  <tr id="support">
+    <th>サポート</th>
+    <td colspan="2"><input type="text" value="0" /></td>
   </tr>
 
 </table>
-
+<button>計算</button>
 <table id="result">
 </table>
