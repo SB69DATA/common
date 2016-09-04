@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>SB69 スクロールバー</title>
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <script>
+    (function($) {
+      $(window).on("load", function() {
+
+        $("#scroll").mCustomScrollbar({
+          theme: "light-thick",
+          scrollbarPosition: "outside"
+        });
+
+      });
+    })(jQuery);
+  </script>
+  <style>
+    body {
+      background: #51a9e4;
+    }
+    
+    #scroll {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+      background: #fff;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .mCSB_1_scrollbar {
+      right: -16px !important;
+      opacity: 1.0 !important;
+    }
+    
+    .mCSB_dragger_bar {
+      background: #fdfefe !important;
+      border-radius: 3px !important;
+      width : 4px !important;
+      border : 1px solid #d0cecd !important;
+    }
+    
+    .mCSB_draggerRail {
+      background: #505050 !important;
+      width : 6px !important;
+      border-radius: 3px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="scroll">
+    test<br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br> test
+    <br>
+  </div>
+</body>
+
+</html>
