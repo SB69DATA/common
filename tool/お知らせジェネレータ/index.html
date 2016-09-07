@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>SB69 お知らせジェネレータ</title>
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/spectrum.min.js"></script>
+  <script src="js/newsjenerator.js"></script>
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="css/spectrum.min.css" />
+  <link rel="stylesheet" href="css/newsjenerator.css" />
+</head>
+
+<body>
+  <div id="jenerator">
+    <h1>SB69 お知らせジェネレータ</h1>
+    <div id="screen">
+      <div id="frame1">
+        <div id="frame2">
+          <div id="frame3">
+            <div id="frame4">
+              <div id="frame5">
+                <div id="title"></div>
+                <div id="subtitle"></div>
+                <div id="banner"></div>
+                <div id="body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="shadow">
+      </div>
+    </div>
+
+    <!--<div id="sample">
+      <img src="sample3.png" />
+    </div>-->
+
+    <div id="input">
+      <dl>
+        <dt>タイトル</dt>
+        <dd><input id="input_title" type="text" value="インフォメーション" /></dd>
+        <dt>サブタイトル</dt>
+        <dd><input id="input_subtitle" type="text" value="SB69 お知らせジェネレータ" /></dd>
+        <dt>バナー画像 <small>(370x85, 740x170, 1480x340 など)</small></dt>
+        <dd>
+          <button id="input_bannerimg_clear">clear</button>
+          <input id="input_bannerimg" type="file" accept="image/*" />
+        </dd>
+        <dt id="input_bgimg_description">背景画像 <small>(512x683, 1024x1366, 2048x2732 など)</small></dt>
+        <dd>
+          <button id="input_bgimg_clear">clear</button>
+          <input id="input_bgimg" type="file" accept="image/*" />
+        </dd>
+        <dt>背景サイズ</dt>
+        <dd>
+          <input type="radio" id="input_bgimg_size_ipad" name="input_bgimg_size" value="ipad" checked />
+          <label for="input_bgimg_size_ipad">iPad</label>
+          <input type="radio" id="input_bgimg_size_iphone" name="input_bgimg_size" value="iphone" />
+          <label for="input_bgimg_size_iphone">iPhone</label>
+        </dd>
+        <dt>本文 <input type="text" id="input_bodycolor" /></dt>
+        <dd><textarea id="input_body">
+[9fc5e8]■概要[ffffff]
+SB69のお知らせっぽいものを生成するジェネレータです。
+[ff895f]PC版のGoogle Chrome[ffffff]で正常に表示することができます。
+Webフォントを使用しているため、その他ブラウザでは文字にアンチエイリアスがかからず、正常に表示することができません。
+(画面を135%程度以上拡大すると、その他ブラウザでもアンチエイリアスがかかります)
+
+[9fc5e8]■使い方[ffffff]
+右の入力エリアに入力した内容が、リアルタイムでこの表示エリアに反映されます。
+テキストの前に[ffa0a0\]のようにカラーコードを指定すると、[ffa0a0]テキストに色をつけることができます。[ffffff]
+
+[9fc5e8]■保存方法[ffffff]
+入力した内容を画像で保存する...なんて便利な機能はないので、画面をキャプチャしてペイントで加工するなりして保存してください。
+          </textarea></dd>
+
+      </dl>
+    </div>
+  </div>
+
+</body>
+
+</html>
