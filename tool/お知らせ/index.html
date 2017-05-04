@@ -1,84 +1,84 @@
-<DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
 
-  <head>
-    <meta charset="utf-8" />
-    <title>SB69 お知らせ</title>
-    <style>
-      body {
-        background: #333;
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>SB69 お知らせ</title>
+  <style>
+    body {
+      background: #333;
+    }
 
-      html {
-        color: #fff;
-      }
+    html {
+      color: #fff;
+    }
 
-      a:link,
-      a:visited {
-        color: #fff;
-      }
+    a:link,
+    a:visited {
+      color: #fff;
+    }
 
-      h1 {
-        text-decoration: underline;
-      }
-    </style>
-    <script>
-      var test = function (data) {
+    h1 {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    var test = function (data) {
 
-        window.onload = function () {
-          var html = '';
-          var news;
+      window.onload = function () {
+        var html = '';
+        var news;
 
-          html += '<table>';
-          for (var i = 0, iLen = data.length; i < iLen; i++) {
-            news = data[i];
-            html += '<tr>';
-            if (new Date() - new Date(news.start) < 1000 * 60 * 60 * 24) {
-              html += '<td><span title="24時間以内に追加されたニュース">NEW!</span></td>';
-            } else {
-              html += '<td></td>';
-            }
-            html += '<td><a href="#news' + i + '">' + coloredit(news.title) + '</a></td>';
-            html += '<td><span>' + coloredit(news.subtitle) + '</td>';
-            html += '</tr>';
+        html += '<table>';
+        for (var i = 0, iLen = data.length; i < iLen; i++) {
+          news = data[i];
+          html += '<tr>';
+          if (new Date() - new Date(news.start) < 1000 * 60 * 60 * 24) {
+            html += '<td><span title="24時間以内に追加されたニュース">NEW!</span></td>';
+          } else {
+            html += '<td></td>';
           }
-          html += '</table>';
-
-          for (var i = 0, iLen = data.length; i < iLen; i++) {
-            news = data[i];
-            html += '<table>';
-            html += '<tr><td><h1 id="news' + i + '"><span>' + coloredit(news.title) + '</h1></td></tr>';
-            html += '<tr><td><h2><span>' + coloredit(news.subtitle) + '</h2></td></tr>';
-            html += '<tr><td><span>' + coloredit(news.body.replace(/\r\n|\r|\n/g, '<br />')) + '</td></tr>';
-            html += '</table>';
-          }
-
-          function coloredit(str) {
-            var editFlag = false;
-
-            str = str.replace(/\[([A-Fa-f0-9]{6})\]/g, function (a1, a2) {
-              editFlag = true;
-              return '</span><span style="color:#' + a2 + '">';
-            });
-
-            if (editFlag) {
-              str += '</span>';
-            }
-
-            return str;
-          }
-
-          document.getElementById('content').innerHTML = html;
+          html += '<td><a href="#news' + i + '">' + coloredit(news.title) + '</a></td>';
+          html += '<td><span>' + coloredit(news.subtitle) + '</td>';
+          html += '</tr>';
         }
+        html += '</table>';
+
+        for (var i = 0, iLen = data.length; i < iLen; i++) {
+          news = data[i];
+          html += '<table>';
+          html += '<tr><td><h1 id="news' + i + '"><span>' + coloredit(news.title) + '</h1></td></tr>';
+          html += '<tr><td><h2><span>' + coloredit(news.subtitle) + '</h2></td></tr>';
+          html += '<tr><td><span>' + coloredit(news.body.replace(/\r\n|\r|\n/g, '<br />')) + '</td></tr>';
+          html += '</table>';
+        }
+
+        function coloredit(str) {
+          var editFlag = false;
+
+          str = str.replace(/\[([A-Fa-f0-9]{6})\]/g, function (a1, a2) {
+            editFlag = true;
+            return '</span><span style="color:#' + a2 + '">';
+          });
+
+          if (editFlag) {
+            str += '</span>';
+          }
+
+          return str;
+        }
+
+        document.getElementById('content').innerHTML = html;
       }
-    </script>
+    }
+  </script>
 
-    <script src="https://script.google.com/macros/s/AKfycbyAQ9z6CGZ8Yu5PR89SPNajc3iSsZ-vyVXfKfsdvoF9MKujvvSO/exec?callback=test"
-      async></script>
-  </head>
+  <script src="https://script.google.com/macros/s/AKfycbyAQ9z6CGZ8Yu5PR89SPNajc3iSsZ-vyVXfKfsdvoF9MKujvvSO/exec?callback=test"
+    async></script>
+</head>
 
-  <body>
-    <div id="content">読み込み中。。。</div>
-  </body>
+<body>
+  <div id="content">読み込み中。。。</div>
+</body>
 
-  </html>
+</html>
