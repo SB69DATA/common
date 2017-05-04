@@ -1,0 +1,71 @@
+<DOCTYPE html>
+  <html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>SB69 お知らせ</title>
+    <style>
+      body {
+        background: #333;
+      }
+
+      .newsbody {
+        color: #fff;
+      }
+    </style>
+    <script>
+      var test = function (data) {
+
+        window.onload = function () {
+          var html = '';
+          var news;
+
+          html += '<table>';
+          for (var i = 0, iLen = data.length; i < iLen; i++) {
+            news = data[i];
+            html += '<tr>';
+            html += '<td><a href="#news' + i + '">' + coloredit(news.title) + '</a></td>';
+            html += '<td><span>' + coloredit(news.subtitle) + '</td>';
+            html += '</tr>';
+          }
+          html += '</table>';
+
+          for (var i = 0, iLen = data.length; i < iLen; i++) {
+            news = data[i];
+            html += '<table>';
+            html += '<tr><td><h1 id="news' + i + '"><span>' + coloredit(news.title) + '</h1></td></tr>';
+            html += '<tr><td><h2><span>' + coloredit(news.subtitle) + '</h2></td></tr>';
+            html += '<tr><td class="newsbody"><span>' + coloredit(news.body.replace(/\r\n|\r|\n/g, '<br />')) +
+              '</td></tr>';
+            html += '</table>';
+          }
+
+          function coloredit(str) {
+            var editFlag = false;
+
+            str = str.replace(/\[([A-Fa-f0-9]{6})\]/g, function (a1, a2) {
+              editFlag = true;
+              return '</span><span style="color:#' + a2 + '">';
+            });
+
+            if (editFlag) {
+              str += '</span>';
+            }
+
+            return str;
+          }
+
+          document.getElementById('content').innerHTML = html;
+        }
+      }
+    </script>
+
+    <script src="https://script.google.com/macros/s/AKfycbyAQ9z6CGZ8Yu5PR89SPNajc3iSsZ-vyVXfKfsdvoF9MKujvvSO/exec?callback=test" async></script>
+  </head>
+
+  <body>
+    5分毎に更新
+    <div id="content"></div>
+  </body>
+
+  </html>
